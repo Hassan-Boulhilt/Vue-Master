@@ -1,6 +1,6 @@
 <template>
   <header class="w-full text-sm">
-    <div class="fixed top-0 left-0 h-16 w-full bg-white">
+    <div class="fixed left-0 top-0 h-16 w-full bg-white">
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
@@ -21,14 +21,26 @@
             </li>
           </ul>
         </nav>
+
+        <div class="ml-auto flex h-full items-center">
+          <profile-image v-if="isLoggedIn" />
+          <action-button v-else @click="loginUser" />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "@/components/ActionButton.vue";
+import ProfileImage from "@/components/ProfileImage.vue";
+
 export default {
   name: "MainNav",
+  components: {
+    ActionButton,
+    ProfileImage,
+  },
   data() {
     return {
       company: "Bobo Careers",
@@ -41,7 +53,13 @@ export default {
         "Students",
         "Jobs",
       ],
+      isLoggedIn: false,
     };
+  },
+  methods: {
+    loginUser() {
+      this.isLoggedIn = true;
+    },
   },
 };
 </script>
